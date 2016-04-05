@@ -23,6 +23,26 @@ class MainController {
 	
 		return $app ['twig']->render ( 'index.html.twig', $args );
 	}
+	
+	public function loginUser(Request $request, Application $app) {
+		
+		$username = $request->get('username');
+		$password = $request->get('password'); 
+		$args = [
+				
+				'title' => 'test'
+		];
+	
+		return $app ['twig']->render ( 'index.html.twig', $args );
+	}
+	
+	public function loginPage(Request $request, Application $app) {
+		$args = [
+				'title' => 'test'
+		];
+		
+		return $app['twig']->render('login.html.twig', $args);
+	}
 }
 
 ?>
