@@ -29,7 +29,7 @@ class MainController {
 		$username = $request->get('username');
 		$password = $request->get('password'); 
 		$args = [
-				
+				'name' => $username,
 				'title' => 'test'
 		];
 	
