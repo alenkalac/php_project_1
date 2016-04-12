@@ -8,9 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MainController {
 	public function indexPage(Request $request, Application $app) {
-		$args = [ 
-				'name' => 'Alen2',
-				'title' => 'test',
+		$args = [
+				'title' => 'ITB Karate | Home Page',
 				'page' => 'home'
 		];
 		

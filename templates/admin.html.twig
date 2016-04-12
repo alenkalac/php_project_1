@@ -12,9 +12,9 @@
 	</div>
 	
 	<div class="col-md-9">
-		<div class="panel panel-info">
-			<div class="panel-heading">List of all students</div>
-			<div class="panel-body">
+		<div class="card card-inverse">
+			<div class="card-header card-primary">List of all students</div>
+			<div class="card-block">
 				 <table class="table table-hover table-condensed table-striped">
 		  			<tr>
 		  				<th>Barcode</th>
@@ -24,7 +24,7 @@
 		  			
 		  			{% for student in  students %}
 						<tr>
-							<td>{{ student.barcode|e }}</td>
+							<td><a href='/student/{{ student.barcode|e }}'>{{ student.barcode|e }}</a></td>
 							<td>{{ student.name|e }}</td>
 							<td>{{ student.surname|e }}</td>
 		  			 </tr>

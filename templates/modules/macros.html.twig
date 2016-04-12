@@ -1,9 +1,9 @@
 {% macro link(link, text, page) %}
 	{% if(text|lower == page|lower) %}
-		<li class='active'>
+		<li class='nav-item active'>
 	{% else %}
-		<li>
+		<li class='nav-item'>
 	{% endif %}
 	
-	<a href='{{ link }}'>{{ text }}</a></li>
+	<a class="nav-link" href='{{ link }}'>{{ text }}</a></li>
 {% endmacro %}

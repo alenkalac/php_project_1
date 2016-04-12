@@ -1,15 +1,31 @@
 {% import "modules/macros.html.twig" as nav_item %}
 
-<nav class="navbar navbar-default" role="navigation">
-	<div class="navbar-header">
-		<a class="navbar-brand" href="/">ITB KARATE CLUB</a>
+<nav class="navbar navbar-dark bg-primary custom-nav">
+   <a class="navbar-brand" href="/"><img alt="Brand" src="images/logo-sm.png"></a>
+
+    <ul class="nav navbar-nav pull-xs-right">
+    	 {{ nav_item.link('/', 'Home', page) }}
+		{{ nav_item.link('/classes', 'Classes', page) }}
+		{{ nav_item.link('/syllabus', 'Syllabus', page) }}
+		{{ nav_item.link('/contacts', 'Contacts', page) }}
+			
+		{% if app.session.get('user') %}
+			{{ nav_item.link('/logout', 'Logout') }}
+		{% else %}
+			{{ nav_item.link('/login', 'Login', page) }}
+		{% endif %}
+    </ul>
+</nav>
+{#
+<nav class="navbar navbar-light bg-faded no-radius" role="navigation">
+		<a class="navbar-brand" href="#">
+        	<img alt="Brand" src="images/logo-sm.png">
+      	</a>
 		<button type="button" class="navbar-toggle" data-toggle="collapse"
-			data-target=".navbar-menu">
-			<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+			data-target="#nav-collapse">
 			<span class="icon-bar"></span><span class="icon-bar"></span>
 		</button>
-	</div>
-	<div class="collapse navbar-collapse navbar-menu">
+	<div class="collapse navbar-collapse navbar-menu" id="nav-collapse">
 		<ul class="nav navbar-nav navbar-right">
 			{{ nav_item.link('/', 'Home', page) }}
 			{{ nav_item.link('/classes', 'Classes', page) }}
@@ -24,3 +40,5 @@
 		</ul>
 	</div>
 </nav>
+#}
+
