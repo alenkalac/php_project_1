@@ -1,0 +1,9 @@
+{% macro link(link, text, page) %}
+	{% if(text|lower == page|lower) %}
+		<li class='active'>
+	{% else %}
+		<li>
+	{% endif %}
+	
+	<a href='{{ link }}'>{{ text }}</a></li>
+{% endmacro %}

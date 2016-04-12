@@ -24,6 +24,10 @@ class User {
 	public function getRole() {
 		return $this->role;
 	}
+	
+	public static function fromSerialize($data) {
+		return unserialize($data);
+	}
 }
 
 ?>

@@ -1,9 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
+	Admin Page
 {% endblock %}
 
 {% block content %}
-<h1>Admin page</h1>
-{{ app.session.get("user") }}
+
+<div class="row">
+	<div class="col-md-3">
+		{% include 'modules/admin-controls.html.twig' %}
+	</div>
+	
+	<div class="col-md-9">
+		<div class="panel panel-info">
+			<div class="panel-heading">List of all students</div>
+			<div class="panel-body">
+				 <table class="table table-hover table-condensed table-striped">
+		  			<tr>
+		  				<th>Barcode</th>
+		  				<th>Student Name</th>
+		  				<th>Student Surname</th>
+		  			</tr>
+		  			
+		  			{% for student in  students %}
+						<tr>
+							<td>{{ student.barcode|e }}</td>
+							<td>{{ student.name|e }}</td>
+							<td>{{ student.surname|e }}</td>
+		  			 </tr>
+					{% endfor %}
+		  		
+		  		</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 {% endblock %}

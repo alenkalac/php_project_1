@@ -12,7 +12,7 @@ class Database {
 	
 	public function __construct() {
 		try {
-			$this->databaseConnection = new PDO("mysql:host=localhost:3306;dbname=php_project_1", $this->username, $this->password);
+			$this->databaseConnection = new PDO("mysql:host=localhost:3307;dbname=php_project_1", $this->username, $this->password);
 			$this->databaseConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return true;
 		} catch(\PDOException $e) {
@@ -48,7 +48,15 @@ class Database {
 		}else {
 			return null;
 		}
+	}
+	
+	public function getAllStudents() {
+		$query = $this->databaseConnection->prepare("SELECT * FROM student");
+		$query->execute();
 		
+		$result = $query->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
 	}
 	
 }

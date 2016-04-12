@@ -8,3 +8,5 @@ $app ['debug'] = true;
 $app->register ( new Silex\Provider\TwigServiceProvider (), array (
 		'twig.path' => $templatePath 
 ) );
+
+$app->register(new Silex\Provider\SessionServiceProvider());
