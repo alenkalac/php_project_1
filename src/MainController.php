@@ -27,7 +27,14 @@ class MainController {
 	public function loginUser(Request $request, Application $app) {
 		
 		$username = $request->get('username');
-		$password = $request->get('password'); 
+		$password = $request->get('password');
+		
+		$database = new Database();
+		$success = $database->checkLogin($username, $password);
+		
+		echo $success;
+		
+		die();
 		$args = [
 				'name' => $username,
 				'title' => 'test'

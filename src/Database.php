@@ -30,6 +30,18 @@ class Database {
 		else return false;
 	}
 	
+	public function checkLogin($username, $password) {
+		$query = $this->databaseConnection->prepare("SELECT password FROM student WHERE username = :USER");
+		$query->bindParam(":USER", $username);
+		$query->execute();
+		
+		$result = $query->fetch();
+		
+		$passDatabase = $result['password'];
+		return (strcmp($password, $passDatabase) === 0);
+		
+	}
+	
 }
 
 
