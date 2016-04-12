@@ -41,6 +41,7 @@ class MainController {
 			return $app ['twig']->render ( 'error.html.twig', $args );
 		
 		else if($user->getRole() == 0) {
+			$app->get('session')->set('user',  array ('user' => $user));
 			return $app ['twig']->render ( 'student.html.twig', $args );
 		}
 		else if($user->getRole() == 1){

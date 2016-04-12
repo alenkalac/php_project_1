@@ -43,7 +43,8 @@ class Database {
 		
 		if(strcmp($password, $passDatabase) === 0)
 		{
-			return new User($id, $username, $role);
+			$user = new User($id, $username, $role);
+			return $user;
 		}else {
 			return null;
 		}
