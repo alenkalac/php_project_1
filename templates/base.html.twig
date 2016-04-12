@@ -7,7 +7,7 @@
 			@import {{ app.request.basepath }} "/css/navbar.css";
 			@import {{ app.request.basepath }} "/css/main.css";
 		</style>
-		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<script src= {{ app.request.basepath }} "/plugins/jquery/jquery-2.2.2.min.js"></script>
 		<script src= {{ app.request.basepath }} "/plugins/bootstrap400/js/bootstrap.min.js"></script>
 		
@@ -15,10 +15,12 @@
 	</head>
 	
 	<body>
-		{% include 'nav.html.twig' %}
+		{% include 'modules/nav.html.twig' %}
 		
 		<div class="container-fluid">	
 			{% block content %}{% endblock %}
+			
+			{% include 'modules/footer.html.twig' %}
 		</div>
 	</body>
 </html>

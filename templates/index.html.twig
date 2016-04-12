@@ -1,31 +1,68 @@
-{% extends "base.html.twig" %}
+{% extends "base.html.twig" %} 
 
-{# Title of the page #}
-{% block title %} 
-	{{ title }}
-{% endblock %}
+{# Title of the page #} {% block title %} {{ title }} {% endblock %} 
 
-{# Body content #}
+{# Body content #} 
+
 {% block content %}
 	<div class="row">
-		<div class="col-md-12">
-			<div class="jumbotron">
-		  		<h1>Welcome</h1>
-		  		<p>
-		  			Welcome to ITB Karate school, karate is a martial art of Japanese origin that 
-		  			deals with attacks through evasive body movements and/or blocking, and counter 
-		  			attacks using kicks, punches and strikes. Joint locks, restraints and takedowns 
-		  			are also used, but to a lesser extent. People variously practice it as a form of self 
-		  			defence, a way of keeping healthy and a sport.
-				</p>
-				<p>
-					As a self defence system, karate does not so much 
-					teach a set of standard responses to a set of limited 
-					scenarios, but rather teaches a set of principles that can be applied in any situation. 
-		  		</p>
-		  		<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+		<div class="fixed-width-1280">{% include 'modules/carosel.html.twig' %}
+		</div>
+	</div>
+	<div class="row pricing">
+		<div class="fixed-width-1280">
+			<div class="col-md-4">
+				<div class="card card-inverse">
+					<div class="card-header card-primary">Junior Group</div>
+					<div class="card-block">
+						<ul>
+							<li>Kids upto age of 8</li>
+							<li>Two Days per week</li>
+						</ul>
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3">
+								<a href="" class="btn btn-primary btn-block">Apply</a>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card card-inverse">
+					<div class="card-header card-info">Senior Group</div>
+					<div class="card-block">
+						<ul>
+							<li>Young adults between ages 9 - 18</li>
+							<li>Two Days per week</li>
+						</ul>
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3">
+								<a href="" class="btn btn-primary btn-block">Apply</a>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card card-inverse">
+					<div class="card-header card-success">Adults Group</div>
+					<div class="card-block">
+						<ul>
+							<li>Adults aged 18+</li>
+							<li>Three Days per week</li>
+						</ul>
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3">
+								<a href="" class="btn btn-primary btn-block">Apply</a>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	
 {% endblock %}

@@ -22,7 +22,7 @@ class MainController {
 		
 		if(!$user)
 			return new RedirectResponse('/');
-		if(!$user->getRole() != 0)
+		if($user->getRole() != Roles::$ADMIN)
 			return new RedirectResponse('/login');
 		
 		$database = new Database();
@@ -43,14 +43,19 @@ class MainController {
 		$user = User::fromSerialize($app['session']->get("user"));
 		
 		$args = [
-				'name' => 'Alen2',
-				'title' => 'test',
+				'name' => $user->getUsername(),
+				'title' => 'Student Page',
 				'page' => 'student',
 		];
 		
+		//var_dump($user);
+		//print()
+		
+		//die();
+		
 		if(!$user)
 			return new RedirectResponse('/');
-		if(!$user->getRole() != 1)
+		if($user->getRole() != Roles::$STUDENT)
 			return new RedirectResponse('/login');
 	
 		return $app ['twig']->render ( 'student.html.twig', $args );
@@ -68,24 +73,33 @@ class MainController {
 		$password = $request->get('password');
 		
 		$user = $database->checkLogin($username, $password);
-		$userDataSerialized = serialize($user);
-		
-		$app['session']->set("user", $userDataSerialized);
 		
 		$args = [
 				'name' => $username,
-				'title' => 'test',
+				'title' => 'Login Form',
 				'page' => 'login',
 		];
 		
-		if($user == null)
-			return $app ['twig']->render ( 'error.html.twig', $args );
+		if($user == null) {
+			$args['error'] = "Username or Password are incorrect, Try Again";
+			return $app ['twig']->render ( 'login.html.twig', $args );
+		}
 		
-		else if($user->getRole() == 0) {
+		$userDataSerialized = serialize($user);
+		
+		$app['session']->set("user", $userDataSerialized);
+		$app['session']->set("name", $username);
+		
+		if($user->getRole() == Roles::$STUDENT) {
+			$app['session']->set("role", Roles::$STUDENT);
 			return new RedirectResponse("/student");
 		}
-		else if($user->getRole() == 1){
+		else if($user->getRole() == Roles::$ADMIN){
+			$app['session']->set("role", Roles::$ADMIN);
 			return new RedirectResponse("/admin");
+		}
+		else {
+			return new RedirectResponse("/");
 		}
 	}
 	
