@@ -30,17 +30,26 @@ class MainController {
 		$password = $request->get('password');
 		
 		$database = new Database();
-		$success = $database->checkLogin($username, $password);
+		$user = $database->checkLogin($username, $password);
 		
-		echo $success;
-		
-		die();
 		$args = [
 				'name' => $username,
 				'title' => 'test'
 		];
+		
+		if($user == null)
+			return $app ['twig']->render ( 'error.html.twig', $args );
+		
+		else if($user->getRole() == 0) {
+			return $app ['twig']->render ( 'student.html.twig', $args );
+		}
+		else if($user->getRole() == 1){
+			return $app ['twig']->render ( 'admin.html.twig', $args );
+		}
+		
+		
 	
-		return $app ['twig']->render ( 'index.html.twig', $args );
+		
 	}
 	
 	public function loginPage(Request $request, Application $app) {

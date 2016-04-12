@@ -31,14 +31,22 @@ class Database {
 	}
 	
 	public function checkLogin($username, $password) {
-		$query = $this->databaseConnection->prepare("SELECT password FROM student WHERE username = :USER");
+		$query = $this->databaseConnection->prepare("SELECT * FROM user WHERE username = :USER");
 		$query->bindParam(":USER", $username);
 		$query->execute();
 		
 		$result = $query->fetch();
 		
+		$id = $result['id'];
 		$passDatabase = $result['password'];
-		return (strcmp($password, $passDatabase) === 0);
+		$role = $result['role'];
+		
+		if(strcmp($password, $passDatabase) === 0)
+		{
+			return new User($id, $username, $role);
+		}else {
+			return null;
+		}
 		
 	}
 	
