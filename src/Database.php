@@ -43,7 +43,7 @@ class Database {
 		
 		if(strcmp($password, $passDatabase) === 0)
 		{
-			$user = new User($id, $username, $role);
+			$user = new User($username, $id, $role);
 			return $user;
 		}else {
 			return null;
@@ -55,6 +55,24 @@ class Database {
 		$query->execute();
 		
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
+	
+	public function getStudentById($id) {
+		$query = $this->databaseConnection->prepare("SELECT * FROM student WHERE id = :ID");
+		$query->bindParam(":ID", $id);
+		$query->execute();
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
+	
+	public function getStudentByBarcode($barcode) {
+		$query = $this->databaseConnection->prepare("SELECT * FROM student WHERE barcode = :BARCODE");
+		$query->bindParam(":BARCODE", $barcode);
+		$query->execute();
+		$result = $query->fetch(PDO::FETCH_ASSOC);
 		
 		return $result;
 	}

@@ -29,8 +29,8 @@ class MainController {
 		$students = $database->getAllStudents();
 		
 		$args = [
-				'name' => 'Alen2',
-				'title' => 'test',
+				'name' => $user->getUsername(),
+				'title' => 'Admin Page',
 				'students' => $students,
 				'page' => 'admin'
 		];
@@ -38,26 +38,26 @@ class MainController {
 		return $app ['twig']->render ( 'admin.html.twig', $args );
 	}
 	
-	public function studentPage(Request $request, Application $app) {
+	public function studentPage($barcode, Request $request, Application $app) {
 		
 		$user = User::fromSerialize($app['session']->get("user"));
 		
+		$student = new Student($barcode);
+		
 		$args = [
 				'name' => $user->getUsername(),
-				'title' => 'Student Page',
+				'title' => 'Student Page ' . $barcode,
 				'page' => 'student',
+				'user' => $user,
+				'student' => $student,
 		];
-		
-		//var_dump($user);
-		//print()
-		
-		//die();
 		
 		if(!$user)
 			return new RedirectResponse('/');
-		if($user->getRole() != Roles::$STUDENT)
+		if( !($user->getRole() == Roles::$STUDENT || $user->getRole() == Roles::$ADMIN) ) {
 			return new RedirectResponse('/login');
-	
+		}
+		
 		return $app ['twig']->render ( 'student.html.twig', $args );
 	}
 	
