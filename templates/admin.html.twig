@@ -20,6 +20,7 @@
 		  				<th>Barcode</th>
 		  				<th>Student Name</th>
 		  				<th>Student Surname</th>
+		  				<th>Options</th>
 		  			</tr>
 		  			
 		  			{% for student in  students %}
@@ -27,6 +28,10 @@
 							<td><a href='/student/{{ student.barcode|e }}'>{{ student.barcode|e }}</a></td>
 							<td>{{ student.name|e }}</td>
 							<td>{{ student.surname|e }}</td>
+							<td class="text-xs-center">
+								<a href="" data-toggle="tooltip" data-placement="top" title="Edit Student" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+								<a href="" data-toggle="tooltip" data-placement="top" title="Delete Student" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+							</td>
 		  			 </tr>
 					{% endfor %}
 		  		
@@ -34,6 +39,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
 </div>
 
 

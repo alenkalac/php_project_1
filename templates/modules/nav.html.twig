@@ -7,12 +7,13 @@
     	{% if app.session.get('role') %}
 			<li class="nav-item dropdown">
 			    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" 
-			    	aria-haspopup="true" aria-expanded="false">Welcome {{ app.session.get('name')|e }}</a>
+			    	aria-haspopup="true" aria-expanded="false">Welcome {{ app.session.get('name')|e|capitalize }}</a>
 			    <div class="dropdown-menu">
 			    	{% if app.session.get('role') == 2 %}
 			      		<a class="dropdown-item" href="/admin">Admin Page</a>
+			      		<a class="dropdown-item" href="/admin/barcode">Record Attendance</a>
 			      	{% elseif app.session.get('role') == 1 %}
-			      		<a class="dropdown-item" href="/student">Profile</a>
+			      		<a class="dropdown-item" href="/student/{{ app.session.get('barcode') }}">Profile</a>
 			      	{% endif %}
 			    </div>
 			  </li>

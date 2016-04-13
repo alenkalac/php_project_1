@@ -11,6 +11,7 @@ class Student {
 	private $name;
 	private $surname;
 	private $barcode;
+	private $attendance;
 	
 	public function __construct($barcode) {
 		
@@ -21,6 +22,8 @@ class Student {
 		$this->name = $s['name'];
 		$this->surname = $s['surname'];
 		$this->barcode = $s['barcode'];
+		
+		$this->attendance = $database->getAttendance($this->barcode);
 	}
 	
 	public function getId() {
@@ -37,6 +40,17 @@ class Student {
 	
 	public function getBarcode() {
 		return $this->barcode;
+	}
+	
+	public function getAttendance() {
+		return $this->attendance;
+	}
+	
+	public static function getStudentById($id) {
+		$database = new Database();
+		$s = $database->getStudentById($id);
+		
+		return new Student($s['barcode']);
 	}
 	
 	

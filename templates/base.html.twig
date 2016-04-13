@@ -3,13 +3,16 @@
 	<head>
 		<style>
 			@import {{ app.request.basepath }} "/plugins/bootstrap400/css/bootstrap.min.css";
-			/*@import {{ app.request.basepath }} "/plugins/bootstrap400/css/bootstrap-theme.min.css";*/
+			@import {{ app.request.basepath }} "/plugins/tether/tether.min.css";
 			@import {{ app.request.basepath }} "/css/navbar.css";
 			@import {{ app.request.basepath }} "/css/main.css";
+			
 		</style>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<script src= {{ app.request.basepath }} "/plugins/tether/tether.min.js"></script>
 		<script src= {{ app.request.basepath }} "/plugins/jquery/jquery-2.2.2.min.js"></script>
 		<script src= {{ app.request.basepath }} "/plugins/bootstrap400/js/bootstrap.min.js"></script>
+		
 		
 		<title>{% block title %}{% endblock %}</title>
 	</head>
@@ -17,9 +20,10 @@
 	<body>
 		{% include 'modules/nav.html.twig' %}
 		
-		<div class="container-fluid">	
-			{% block content %}{% endblock %}
-			
+		<div class="container-fluid">
+			<div class="fixed-width-1280">
+				{% block content %}{% endblock %}
+			</div>
 			{% include 'modules/footer.html.twig' %}
 		</div>
 	</body>

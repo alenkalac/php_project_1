@@ -77,6 +77,32 @@ class Database {
 		return $result;
 	}
 	
+	public function getAttendance($barcode){
+		$query = $this->databaseConnection->prepare("SELECT * FROM attendance WHERE student_barcode = :BARCODE");
+		$query->bindParam(":BARCODE", $barcode);
+		$query->execute();
+		$result = $query->fetchAll(PDO::FETCH_ASSOC);
+	
+		return $result;
+	}
+	
+	public function registerStudentAttendance($barcode) {
+		$dt = new \DateTime();
+		$timestamp = $dt->getTimestamp();
+		
+		//check if student exists
+		$student = new Student($barcode);
+		if(!$student->getBarcode())
+			return 0;
+		
+		$query = $this->databaseConnection->prepare("INSERT INTO attendance VALUES(null, :BARCODE, :TIMESTAMP)");
+		$query->bindParam(":BARCODE", $barcode);
+		$query->bindParam(":TIMESTAMP", $timestamp);
+		if($query->execute())
+			return 1;
+		return 0;
+	}
+	
 }
 
 
