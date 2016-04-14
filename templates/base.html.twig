@@ -6,7 +6,8 @@
 			@import {{ app.request.basepath }} "/plugins/tether/tether.min.css";
 			@import {{ app.request.basepath }} "/css/navbar.css";
 			@import {{ app.request.basepath }} "/css/main.css";
-			
+			{% block styles %}
+			{% endblock %}
 		</style>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<script src= {{ app.request.basepath }} "/plugins/tether/tether.min.js"></script>

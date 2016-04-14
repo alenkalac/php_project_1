@@ -4,6 +4,20 @@
 	{{ title }}
 {% endblock %}
 
+{% block styles %}
+	@import "/plugins/monthly/monthly.css";
+	
+	.card-custom {
+		padding: 0;
+	}
+	
+	.monthly-event-list {
+		top: 85px !important;
+		height: calc(100% - 85px) !important;
+	}
+	
+{% endblock %}
+
 {% block content %}
 
 	<div class="row"> 
@@ -53,14 +67,28 @@
 		<div class="col-md-3" >
 			<div class="card card-inverse">
 				<div class="card-header card-success">
-					Grades
+					Calendar
 				</div>
 				
-				<div class="card-block">
-					
+				<div class="card-block card-custom">
+					<div id="calendar"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	
+	<script src="/plugins/monthly/monthly.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			$('#calendar').monthly({
+				mode: 'event',
+				xmlUrl: '/events/{{ student.barcode }}',
+				eventList: true,
+				mode: 'event',
+				weekStart: 'Mon',
+			});
+		});
+		
+	</script>
 {% endblock %}

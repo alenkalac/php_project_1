@@ -195,6 +195,18 @@ class MainController {
 		return $result;
 		
 	}
+	
+	public function eventXml($barcode, Request $request, Application $app) {
+		
+		$db = new Database();
+		$att = $db->getAttendance($barcode);
+		
+		$args = [
+				"attendace" => $att,
+		];
+		
+		return $app['twig']->render('events.xml.twig', $args);
+	}
 }
 
 ?>
