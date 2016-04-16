@@ -41,8 +41,7 @@ class Database {
 		$passDatabase = $result['password'];
 		$role = $result['role'];
 		
-		if(strcmp($password, $passDatabase) === 0)
-		{
+		if(password_verify($password, $passDatabase)) {
 			$user = new User($username, $id, $role);
 			return $user;
 		}else {
