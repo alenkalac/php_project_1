@@ -12,6 +12,9 @@ class Student {
 	private $surname;
 	private $barcode;
 	private $attendance;
+	private $rank;
+	private $belt;
+	private $technique;
 	
 	public function __construct($barcode) {
 		
@@ -22,8 +25,10 @@ class Student {
 		$this->name = $s['name'];
 		$this->surname = $s['surname'];
 		$this->barcode = $s['barcode'];
-		
+		$this->rank = $s['belt'];
+		$this->belt = $s['belt_color'];
 		$this->attendance = $database->getAttendance($this->barcode);
+		$this->technique = $database->getTechniqueForBelt($this->rank);
 	}
 	
 	public function getId() {
@@ -44,6 +49,18 @@ class Student {
 	
 	public function getAttendance() {
 		return $this->attendance;
+	}
+	
+	public function getTechnique() {
+		return $this->technique;
+	}
+	
+	public function getBelt() {
+		return $this->belt;
+	}
+	
+	public function getRank() {
+		return $this->rank;
 	}
 	
 	public static function getStudentById($id) {

@@ -19,10 +19,8 @@
 {% endblock %}
 
 {% block content %}
-
 	<div class="row"> 
 		<div class="col-md-2 text-xs-center">
-		
 			<div class="card card-inverse">
 				<div class="card-header card-success">
 					Student Details
@@ -34,7 +32,6 @@
 					Barcode: {{ student.barcode }}
 				</div>
 			</div>
-			
 		</div>
 		
 		<div class="col-md-7" >
@@ -58,13 +55,25 @@
 							<td>{{ att.date|date("H:i:s", "Europe/Dublin") }}</td>
 						</tr>
 						{% endfor %}
-						
 					</table>
 				</div>
 			</div>
 		</div>
 		
 		<div class="col-md-3" >
+			<div class="card card-inverse">
+				<div class="card-header card-success">
+					List of Techniques
+				</div>
+				<div class="card-block card-custom">
+					<ul class="list-group">
+						{% for tech in student.technique %}
+							<a href='#' class="list-group-item ">{{ tech.name }}</a>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			
 			<div class="card card-inverse">
 				<div class="card-header card-success">
 					Calendar
@@ -89,6 +98,5 @@
 				weekStart: 'Mon',
 			});
 		});
-		
 	</script>
 {% endblock %}

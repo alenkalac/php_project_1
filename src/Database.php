@@ -50,7 +50,7 @@ class Database {
 	}
 	
 	public function getAllStudents() {
-		$query = $this->databaseConnection->prepare("SELECT * FROM student");
+		$query = $this->databaseConnection->prepare("SELECT * FROM student LEFT JOIN belts on student.belt = belts.id ");
 		$query->execute();
 		
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -68,7 +68,7 @@ class Database {
 	}
 	
 	public function getStudentByBarcode($barcode) {
-		$query = $this->databaseConnection->prepare("SELECT * FROM student WHERE barcode = :BARCODE");
+		$query = $this->databaseConnection->prepare("SELECT * FROM student JOIN belts ON student.belt = belts.id WHERE barcode = :BARCODE");
 		$query->bindParam(":BARCODE", $barcode);
 		$query->execute();
 		$result = $query->fetch(PDO::FETCH_ASSOC);
@@ -82,6 +82,15 @@ class Database {
 		$query->execute();
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
 	
+		return $result;
+	}
+	
+	public function getTechniqueForBelt($belt) {
+		$query = $this->databaseConnection->prepare("SELECT * FROM techniques WHERE belt = :BELT");
+		$query->bindParam(":BELT", $belt);
+		$query->execute();
+		$result = $query->fetchAll(PDO::FETCH_ASSOC);
+		
 		return $result;
 	}
 	
