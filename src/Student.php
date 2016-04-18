@@ -69,6 +69,4 @@ class Student {
 		
 		return new Student($s['barcode']);
 	}
-	
-	
 }
