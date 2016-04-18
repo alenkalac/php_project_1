@@ -6,7 +6,7 @@
 
 #my_nav.navbar-default {
 	font-size: 23px;
-	background-image: none !important; 
+	background-image: none !important;
 	background-color: rgba(0, 0, 0, 0);
 	border-bottom-width: 1px;
 	min-height: 65px !important;
@@ -46,5 +46,5 @@
 #my_nav.navbar-default .navbar-toggle:hover .icon-bar,
 	#my_nav.navbar-default .navbar-toggle:focus .icon-bar {
 	background-color: red;
-	
+
 }

@@ -2,17 +2,17 @@
 <html>
 	<head>
 		<style>
-			@import {{ app.request.basepath }} "/plugins/bootstrap/css/bootstrap.min.css";
-			@import {{ app.request.basepath }} "/plugins/bootstrap/css/bootstrap-theme.min.css";
-			@import {{ app.request.basepath }} "/css/navbar.css";
+			@import "/plugins/bootstrap/css/bootstrap.min.css";
+			@import "/plugins/bootstrap/css/bootstrap-theme.min.css";
+			@import "/css/navbar.css";
 		</style>
-		
-		<script src= {{ app.request.basepath }} "/plugins/jquery/jquery-2.2.2.min.js"></script>
-		<script src= {{ app.request.basepath }} "/plugins/bootstrap/js/bootstrap.min.js"></script>
-		
+
+		<script src= "/plugins/jquery/jquery-2.2.2.min.js"></script>
+		<script src= "/plugins/bootstrap/js/bootstrap.min.js"></script>
+
 		<title>{% block title %}{% endblock %}</title>
 	</head>
-	
+
 	<body>
 		{% include 'nav.html.twig' %}
 		{% block content %}{% endblock %}
