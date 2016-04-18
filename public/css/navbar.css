@@ -1,9 +1,11 @@
-#my_nav.navbar-default .navbar-brand {
-	color: rgba(51, 51, 51, 1);
-	font-size: 23px;
-	line-height: 35px;
+.custom-nav {
+	border-radius: 0 !important;
+	border-top: 0;
+	margin-bottom: 15px;
+	padding-top: 5px;
 }
 
+<<<<<<< HEAD
 #my_nav.navbar-default {
 	font-size: 23px;
 	background-image: none !important;
@@ -37,14 +39,28 @@
 #my_nav.navbar-default .navbar-toggle:hover,
 	#my_nav.navbar-default .navbar-toggle:focus {
 	background-color: #f8f8f8;
+=======
+.custom-nav .nav {
+	
+	padding-top: 5px;
+>>>>>>> 01e1b46936ae6b163921fc220313a3dfe3112d91
 }
 
-#my_nav.navbar-default .navbar-toggle .icon-bar {
-	background-color: black;
+.navbar-brand {
+	padding: 0;
+	padding-top: 2px !important;
+	padding-left: 5px !important;
 }
 
+<<<<<<< HEAD
 #my_nav.navbar-default .navbar-toggle:hover .icon-bar,
 	#my_nav.navbar-default .navbar-toggle:focus .icon-bar {
 	background-color: red;
 
 }
+=======
+.navbar-brand img{
+	display: inline-block;
+	width: 150px;
+}
+>>>>>>> 01e1b46936ae6b163921fc220313a3dfe3112d91

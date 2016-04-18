@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			{% if error is defined %}
+			
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<strong>Error!</strong> {{ error|default('') }}
+				</div>
+			{% endif %}
+			<div class="card card-inverse">
+				<div class="card-header card-primary">Login Form</div>
+				<div class="card-block">
+					<form action="/login" method="post">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<div class="input-group">
+								<span class="input-group-addon" id="user_addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+								<input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="Username" aria-describedby="user_addon">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<div class="input-group">	
+								<span class="input-group-addon" id="pass_addon"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+								<input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" aria-describedby="pass_addon">
+							</div>
+							</div>
+						
+						<input type="submit" class="btn btn-primary" value="login">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

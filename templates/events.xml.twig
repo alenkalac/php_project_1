@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<monthly>
+
+	{% for att in attendace %}
+		<event>
+			<id>{{ att.id }}</id>
+			<name>Attendance</name>
+			<startdate>{{ att.date|date("Y-m-d") }}</startdate>
+			<enddate>{{ att.date|date("Y-m-d") }}</enddate>
+			<starttime>{{ att.date|date("H:i") }}</starttime>
+			<color>#FF3C28</color>
+		</event>
+	{% endfor %}
+</monthly>

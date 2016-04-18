@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div id="alert-area">
+			</div>
+			<div class="card" id="barcode-card">
+				<div class="card-header">
+					Scan Barcode
+				</div>
+				
+				<div class="card-block">
+					<form>
+						<div class="input-group">
+							<span class="input-group-addon" id="user_addon"><i class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom"></i></i></span>
+							<input type="text" id="barcode" name="barcode" class="form-control form-control-lg" placeholder="123456" maxlength="6" aria-describedby="user_addon">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="/js/scan.js"></script>
+{% endblock %}

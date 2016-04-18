@@ -1,0 +1,33 @@
+{% import "modules/macros.html.twig" as nav_item %}
+
+<nav class="navbar navbar-dark bg-primary custom-nav">
+   <a class="navbar-brand" href="/"><img alt="Brand" src="/images/logo-sm.png"></a>
+
+    <ul class="nav navbar-nav pull-xs-right">
+    	{% if app.session.get('role') %}
+			<li class="nav-item dropdown">
+			    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" 
+			    	aria-haspopup="true" aria-expanded="false">Welcome {{ app.session.get('name')|e|capitalize }}</a>
+			    <div class="dropdown-menu">
+			    	{% if app.session.get('role') == 2 %}
+			      		<a class="dropdown-item" href="/admin">Admin Page</a>
+			      		<a class="dropdown-item" href="/admin">Add New Student</a>
+			      		<a class="dropdown-item" href="/admin/barcode">Record Attendance</a>
+			      	{% elseif app.session.get('role') == 1 %}
+			      		<a class="dropdown-item" href="/student/{{ app.session.get('barcode') }}">Profile</a>
+			      	{% endif %}
+			    </div>
+			  </li>
+		  {% endif %}
+    	 {{ nav_item.link('/', 'Home', page) }}
+		{{ nav_item.link('/classes', 'Classes', page) }}
+		{{ nav_item.link('/syllabus', 'Syllabus', page) }}
+		{{ nav_item.link('/contacts', 'Contacts', page) }}
+		
+		{% if app.session.get('role') %}
+			{{ nav_item.link('/logout', 'Logout') }}
+		{% else %}
+			{{ nav_item.link('/login', 'Login', page) }}
+		{% endif %}
+    </ul>
+</nav>
