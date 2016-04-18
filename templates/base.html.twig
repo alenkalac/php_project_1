@@ -2,19 +2,30 @@
 <html>
 	<head>
 		<style>
-			@import "/plugins/bootstrap/css/bootstrap.min.css";
-			@import "/plugins/bootstrap/css/bootstrap-theme.min.css";
+			@import "/plugins/bootstrap400/css/bootstrap.min.css";
+			@import "/plugins/tether/tether.min.css";
 			@import "/css/navbar.css";
+			@import "/css/main.css";
+			{% block styles %}
+			{% endblock %}
 		</style>
-
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<script src= "/plugins/tether/tether.min.js"></script>
 		<script src= "/plugins/jquery/jquery-2.2.2.min.js"></script>
-		<script src= "/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src= "/plugins/bootstrap400/js/bootstrap.min.js"></script>
+
 
 		<title>{% block title %}{% endblock %}</title>
 	</head>
 
 	<body>
-		{% include 'nav.html.twig' %}
-		{% block content %}{% endblock %}
+		{% include 'modules/nav.html.twig' %}
+
+		<div class="container-fluid">
+			<div class="fixed-width-1280">
+				{% block content %}{% endblock %}
+			</div>
+			{% include 'modules/footer.html.twig' %}
+		</div>
 	</body>
 </html>
