@@ -1,13 +1,15 @@
-{% extends 'base.html.twig' %}
-
-{% block title %} {{ title }} {% endblock %}
+{% extends 'base.html.twig' %} 
+{% block title %} {{ title }} {% endblock %} 
 
 {% block content %}
-     <div class="row">
-          <div class="col-xs-12">
-               <div class="alert alert-danger text-xs-center">
-                    Page you are trying to access is not available, try again.
-               </div>
-          </div>
-     </div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="text-xs-center">
+				<span class="pnf">404</span>
+			</div>
+			<div class="alert alert-danger text-xs-center">
+				Page you are trying to access is not available, try again!.
+			</div>
+		</div>
+	</div>
 {% endblock %}

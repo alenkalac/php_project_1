@@ -14,11 +14,14 @@ class MainController {
 	*
 	*/
 	public function errorPage($code, Application $app) {
-          $args = [
-				'title' => 'ITB Karate | 404 Not Found',
-				'page' => 'error'
-		];
-		return $app['twig']->render('404.html.twig', $args);
+		
+		if(404 === $code) {
+			$args = [
+					'title' => 'ITB Karate | 404 Not Found',
+					'page' => 'error'
+			];
+			return $app['twig']->render('404.html.twig', $args);
+		}
 	}
 
 	/**

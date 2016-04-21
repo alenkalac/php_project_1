@@ -2,6 +2,10 @@
 	margin-bottom: 15px;
 }
 
+.nav {
+	margin-top: 8px;
+}
+
 .fixed-width-1280 {
 	max-width:1280px;
 	margin-left: auto;
@@ -11,4 +15,10 @@
 .carousel-bg {
 	background-color: rgba(0,0,0,0.3);
 	border-radius: 10px;
+}
+
+.pnf {
+	font-size: 150px !important;
+	font-weight: bolder;
+	
 }
