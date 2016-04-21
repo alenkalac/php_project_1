@@ -9,6 +9,19 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class MainController {
 
 	/**
+	*Error page controller
+	*@param code, An error code
+	*
+	*/
+	public function errorPage($code, Application $app) {
+          $args = [
+				'title' => 'ITB Karate | 404 Not Found',
+				'page' => 'error'
+		];
+		return $app['twig']->render('404.html.twig', $args);
+	}
+
+	/**
 	 * Index Page Controller
 	 * @param Request $request
 	 * @param Application $app
