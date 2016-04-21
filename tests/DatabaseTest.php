@@ -1,7 +1,8 @@
 <?php 
 use alen\Database;
+use alen\Student;
 
-class DatabaseTest extends PHPUnit_Framework_TestCase {
+class DatabaseTest extends \PHPUnit_Framework_TestCase {
 	
 	public function testDatabaseConstructorTrue() {
 		$db = new Database();
@@ -9,14 +10,13 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotNull($db);
 	}
 	
-	public function testInsertSuccessfulIntoDatabase() {
-		$db = new Database();
+	public function testGettingStudentFirstName() {
+		$student = new Student(999888);
 		
-		$result = $db->insertData("test");
+		$result = "Alen";
 		
-		$this->assertTrue($result);
+		$this->assertEquals($student->getName(), $result);
 	}
 }
-
 
 ?>

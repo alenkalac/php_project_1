@@ -110,5 +110,13 @@ class Database {
 			return 1;
 		return 0;
 	}
+	
+	public function getAllBelts() {
+		$query = $this->databaseConnection->prepare("SELECT * FROM belts");
+		$query->execute();
+		$result = $query->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
 
 }

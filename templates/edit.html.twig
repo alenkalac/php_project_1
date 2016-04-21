@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block styles %}
+
+	label {
+		display: inline-block;
+		width: 250px;
+		margin-bottom: 0px;
+	}
+	
+	.input-group {
+		width: 100%;
+	}
+	
+
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="alert alert-info text-xs-center">Editing a student with a barcode <strong>{{ student.barcode|e }}</strong></div>
+		<form class="col-md-6 col-md-offset-3">
+			<div class="input-group">
+				<label>ID</label>
+				<input type="text" value="{{ student.id }}" name="id" class="form-control" disabled>
+			</div>
+			
+			<div class="input-group">
+				<label>First Name</label>
+				<input type="text" value="{{ student.name }}" name="firstname" class="form-control">
+			</div>
+			
+			<div class="input-group">
+				<label>Surname Name</label>
+				<input type="text" value="{{ student.surname }}" name="lastname" class="form-control">
+			</div>
+			
+			<div class="input-group">
+				<label>Date Of Birth</label>
+				<input type="text" value="{{ student.dob }}" name="dob" class="form-control">
+			</div>
+			
+			<div class="input-group">
+				<label>Belt</label>
+				<select class="form-control" name="belt">
+					{% for belt in belts %}
+						{% if student.rank == belt.id %}
+							<option value="{{ belt.id }}" selected>{{ belt.belt_color }}</option>
+						{% else %}	
+							<option value="{{ belt.id }}">{{ belt.belt_color }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+			<div class="input-group">
+				<input type="submit" value="Update" class="btn btn-primary btn-block">
+			</div>
+		</form>
+	</div>
+{% endblock %}

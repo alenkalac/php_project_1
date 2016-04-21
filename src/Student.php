@@ -11,6 +11,7 @@ class Student {
 	private $name;
 	private $surname;
 	private $barcode;
+	private $dob;
 	private $attendance;
 	private $rank;
 	private $belt;
@@ -27,6 +28,7 @@ class Student {
 		$this->barcode = $s['barcode'];
 		$this->rank = $s['belt'];
 		$this->belt = $s['belt_color'];
+		$this->dob = $s['dob'];
 		$this->attendance = $database->getAttendance($this->barcode);
 		$this->technique = $database->getTechniqueForBelt($this->rank);
 	}
@@ -61,6 +63,10 @@ class Student {
 	
 	public function getRank() {
 		return $this->rank;
+	}
+	
+	public function getDob() {
+		return $this->dob;
 	}
 	
 	public static function getStudentById($id) {

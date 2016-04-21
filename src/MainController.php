@@ -211,6 +211,13 @@ class MainController {
 
 	}
 
+	/**
+	 * renders an XML page for the calendar to use as data provider. 
+	 * 
+	 * @param string|int $barcode
+	 * @param Request $request
+	 * @param Application $app
+	 */
 	public function eventXml($barcode, Request $request, Application $app) {
 
 		$db = new Database();
@@ -221,6 +228,21 @@ class MainController {
 		];
 
 		return $app['twig']->render('events.xml.twig', $args);
+	}
+	
+	public function editPage($barcode, Request $request, Application $app) {
+		$student = new Student($barcode);
+		$database = new Database();
+		$belts = $database->getAllBelts();
+		
+		$args = [
+			'title' => 'Edit Student',
+			'page' => '',
+			'student' => $student,
+			'belts' => $belts,
+		];
+		
+		return $app['twig']->render('edit.html.twig', $args);
 	}
 }
 

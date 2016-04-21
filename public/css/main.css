@@ -1,7 +1,6 @@
-.row {
+.row, .input-group  {
 	margin-bottom: 15px;
 }
-
 .nav {
 	margin-top: 8px;
 }
@@ -20,5 +19,4 @@
 .pnf {
 	font-size: 150px !important;
 	font-weight: bolder;
-	
 }
