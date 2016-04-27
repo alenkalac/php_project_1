@@ -11,6 +11,6 @@
     },
  	"scripts":{
  		"phpunit": "php phpunit.phar",
-		"phpunit-coverage": "php phpunit.phar --coverage-html src" 
+		"phpunit-coverage": "php phpunit.phar --coverage-html src/coverage" 
  	}
 }

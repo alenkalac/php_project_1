@@ -1,11 +1,14 @@
 <?php
-
 namespace alen;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+
+/**
+ * @codeCoverageIgnore
+ */
 class MainController {
 
 	/**
@@ -77,7 +80,8 @@ class MainController {
 		if(!$user)
 			return new RedirectResponse('/');
 
-		$student = new Student($barcode);
+		$student = new Student([]);
+		$student->getStudentFromDB($barcode);
 
 		if(!$student->getId())
 			return new RedirectResponse('/');
@@ -231,7 +235,9 @@ class MainController {
 	}
 	
 	public function editPage($barcode, Request $request, Application $app) {
-		$student = new Student($barcode);
+		$student = new Student([]);
+		$student->getStudentFromDB($barcode);
+		
 		$database = new Database();
 		$belts = $database->getAllBelts();
 		

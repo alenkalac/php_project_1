@@ -3,6 +3,9 @@ namespace alen;
 
 use \PDO;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Database {
 
 	private $database = '';
@@ -77,7 +80,7 @@ class Database {
 	}
 
 	public function getAttendance($barcode){
-		$query = $this->databaseConnection->prepare("SELECT * FROM attendance WHERE student_barcode = :BARCODE");
+		$query = $this->databaseConnection->prepare("SELECT * FROM attendance WHERE student_barcode = :BARCODE ORDER BY id DESC");
 		$query->bindParam(":BARCODE", $barcode);
 		$query->execute();
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -99,7 +102,9 @@ class Database {
 		$timestamp = $dt->getTimestamp();
 
 		//check if student exists
-		$student = new Student($barcode);
+		$student = new Student([]);
+		$student->getStudentFromDB($barcode);
+		
 		if(!$student->getBarcode())
 			return 0;
 

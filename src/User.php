@@ -61,7 +61,8 @@ class User {
 	/**
 	 * unserializes data that has been serialized by php so it can be stored in a session
 	 * @param string $data
-	 * @return User 
+	 * @return User
+	 * @codeCoverageIgnore
 	 */
 	public static function fromSerialize($data) {
 		return unserialize($data);
