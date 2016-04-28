@@ -1,16 +1,16 @@
 language: php
 php:
-  	- '5.6'
+ - '5.6'
   
 services:
-  	- mysql
+ - mysql
 
 install: 
-	- composer update
-	
+ composer update
+
 before_script:
-  	- mysql -u root -e 'CREATE DATABASE php_project_1;'
- 	- mysql -u root php_project_1 < database/php_project_1.sql
-	
+- mysql -u root -e 'CREATE DATABASE php_project_1;'
+- mysql -u root php_project_1 < database/php_project_1.sql
+
 script: 
-	- phpunit
+- phpunit
