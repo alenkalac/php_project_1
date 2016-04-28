@@ -35,9 +35,6 @@ class Student {
 			$this->setDob($details['dob']);
 	}
 	
-	/**
-	 * @codeCoverageIgnore
-	 */
 	public function getStudentFromDB($barcode) {
 		$database = new Database();
 		$s = $database->getStudentByBarcode($barcode);
@@ -130,9 +127,6 @@ class Student {
 		$database->updateStudent($this);
 	}
 	
-	/**
-	 * @codeCoverageIgnore
-	 */
 	public static function getStudentById($id) {
 		$database = new Database();
 		$s = $database->getStudentById($id);

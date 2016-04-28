@@ -108,4 +108,13 @@ class StudentTest extends PHPUnit_Framework_TestCase {
 	
 	}
 	
+	public function testGetStudentFromDB() {
+		$student = new Student([]);
+		$student->getStudentFromDB('999888');
+		
+		$name = 'Alen';
+		
+		$this->assertEquals( $name, $student->getName());
+	}
+	
 }
