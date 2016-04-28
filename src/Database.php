@@ -15,7 +15,7 @@ class Database {
 
 	public function __construct() {
 		try {
-			$this->databaseConnection = new PDO("mysql:host=localhost:3307;dbname=$this->database", $this->username, $this->password);
+			$this->databaseConnection = new PDO("mysql:host=127.0.0.1;dbname=$this->database", $this->username, $this->password);
 			$this->databaseConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return true;
 		} catch(\PDOException $e) {
