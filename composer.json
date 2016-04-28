@@ -11,6 +11,7 @@
     },
  	"scripts":{
  		"phpunit": "php phpunit.phar",
-		"phpunit-coverage": "php phpunit.phar --coverage-html src/coverage" 
+		"phpunit-coverage": "php phpunit.phar --coverage-html src/coverage",
+		"phpdoc": "php phpDocumentor.phar -d ./src -t ./src/documentation --template=responsive-twig"
  	}
 }

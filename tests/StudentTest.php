@@ -4,6 +4,8 @@ use alen\Student;
 
 class StudentTest extends PHPUnit_Framework_TestCase {
 	
+	private $oldName = '';
+	
 	public function testStudentConstructorNotNull() {
 		
 		$student = new Student ( [ ] );
@@ -115,6 +117,27 @@ class StudentTest extends PHPUnit_Framework_TestCase {
 		$name = 'Alen';
 		
 		$this->assertEquals( $name, $student->getName());
+	}
+	
+	public function testStudentUpdate() {
+		
+		$result = 'TestName';
+		
+		$student = new Student([]);
+		$student->getStudentFromDB('999888');
+		
+		$this->oldName = $student->getName();
+		
+		$student->setName($result);
+		$student->update();
+		
+		$student->getStudentFromDB('999888');
+		$actual = $student->getName();
+		
+		$student->setName($this->oldName);
+		$student->update();
+		
+		$this->assertEquals($result, $actual);
 	}
 	
 }

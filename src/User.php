@@ -1,7 +1,13 @@
 <?php
-
+/**
+ * User Class
+ */
 namespace alen;
 
+/**
+ * User Class
+ * @author Alen Kalac
+ */
 class User {
 	
 	/**

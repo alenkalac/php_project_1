@@ -1,4 +1,7 @@
 <?php
+/**
+ * Main Controller for the website
+ */
 namespace alen;
 
 use Silex\Application;
@@ -7,14 +10,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 /**
+ * Main Controller Class
  * @codeCoverageIgnore
+ * @author Alen Kalac
  */
 class MainController {
 
 	/**
 	*Error page controller
-	*@param code, An error code
-	*
+	*@param code 
+	*	An error code
+	*@param Application $app
 	*/
 	public function errorPage($code, Application $app) {
 		
@@ -234,6 +240,12 @@ class MainController {
 		return $app['twig']->render('events.xml.twig', $args);
 	}
 	
+	/**
+	 * Edit page controller that renders the edit page template
+	 * @param int|string $barcode
+	 * @param Request $request
+	 * @param Application $app
+	 */
 	public function editPage($barcode, Request $request, Application $app) {
 		$student = new Student([]);
 		$student->getStudentFromDB($barcode);
@@ -251,6 +263,12 @@ class MainController {
 		return $app['twig']->render('edit.html.twig', $args);
 	}
 	
+	/**
+	 * Post edit Detail controller. When student's are edited, form posts to this function
+	 * @param Request $request
+	 * @param Application $app
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
 	public function postEditDetails(Request $request, Application $app) {
 		if($app['session']->get('role') != Roles::$ADMIN)
 			return new RedirectResponse("/login");
@@ -270,6 +288,11 @@ class MainController {
 		return new RedirectResponse("/admin");
 	}
 	
+	/**
+	 * Tech page controller that renders the tech page template
+	 * @param Request $request
+	 * @param Application $app
+	 */
 	public function techPage(Request $request, Application $app) {
 		
 		$database = new Database();
