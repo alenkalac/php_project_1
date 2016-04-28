@@ -20,3 +20,7 @@
 	font-size: 150px !important;
 	font-weight: bolder;
 }
+
+.card-custom {
+	padding: 0;
+}

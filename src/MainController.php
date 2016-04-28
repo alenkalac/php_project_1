@@ -140,7 +140,7 @@ class MainController {
 	 * @param Request $request
 	 * @param Application $app
 	 */
-	public function loginUser(Request $request, Application $app) {
+	public function postLoginUser(Request $request, Application $app) {
 		$database = new Database();
 
 		$username = $request->get('username');
@@ -198,7 +198,7 @@ class MainController {
 	 * @param Request $request
 	 * @param Application $app
 	 */
-	public function registerAttendance(Request $request, Application $app) {
+	public function postRegisterAttendance(Request $request, Application $app) {
 
 		if($app['session']->get('role') != Roles::$ADMIN)
 			return -1;
@@ -249,6 +249,46 @@ class MainController {
 		];
 		
 		return $app['twig']->render('edit.html.twig', $args);
+	}
+	
+	public function postEditDetails(Request $request, Application $app) {
+		if($app['session']->get('role') != Roles::$ADMIN)
+			return new RedirectResponse("/login");
+		
+		$data = [
+				'id' => $request->get('id'),
+				'barcode' => $request->get('barcode'),
+				'name' => $request->get('firstname'),
+				'surname' => $request->get('lastname'),
+				'dob' => $request->get('dob'),
+				'belt' => $request->get('belt'),
+		];
+		
+		$student = new Student($data);
+		$student->update();
+		
+		return new RedirectResponse("/admin");
+	}
+	
+	public function techPage(Request $request, Application $app) {
+		
+		$database = new Database();
+		$belts = $database->getAllBelts();
+		$techs = array();
+		
+		foreach($belts as $belt) {
+			$techs[$belt['belt_id']] = $database->getTechniqueForBelt($belt['belt_id']); 
+		}
+		
+		$args = [
+			'title' => 'Techniques Page',
+			'page' => '',
+			'belts' => $belts,
+			'techs' => $techs,
+				
+		];
+		
+		return $app['twig']->render('tech.html.twig', $args);
 	}
 }
 

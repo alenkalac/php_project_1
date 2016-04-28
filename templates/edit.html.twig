@@ -22,10 +22,15 @@
 {% block content %}
 	<div class="row">
 		<div class="alert alert-info text-xs-center">Editing a student with a barcode <strong>{{ student.barcode|e }}</strong></div>
-		<form class="col-md-6 col-md-offset-3">
+		<form action="/admin/edit" method="post" class="col-md-6 col-md-offset-3">
 			<div class="input-group">
 				<label>ID</label>
-				<input type="text" value="{{ student.id }}" name="id" class="form-control" disabled>
+				<input type="text" value="{{ student.id }}" name="id" class="form-control" readonly>
+			</div>
+			
+			<div class="input-group">
+				<label>Barcode</label>
+				<input type="text" value="{{ student.barcode }}" name="barcode" class="form-control" readonly>
 			</div>
 			
 			<div class="input-group">
@@ -47,10 +52,10 @@
 				<label>Belt</label>
 				<select class="form-control" name="belt">
 					{% for belt in belts %}
-						{% if student.rank == belt.id %}
-							<option value="{{ belt.id }}" selected>{{ belt.belt_color }}</option>
+						{% if student.belt == belt.belt_id %}
+							<option value="{{ belt.belt_id }}" selected class="btn-success">{{ belt.belt_color }}</option>
 						{% else %}	
-							<option value="{{ belt.id }}">{{ belt.belt_color }}</option>
+							<option value="{{ belt.belt_id }}">{{ belt.belt_color }}</option>
 						{% endif %}
 					{% endfor %}
 				</select>

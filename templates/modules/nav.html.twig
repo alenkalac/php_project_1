@@ -11,7 +11,7 @@
 			    <div class="dropdown-menu">
 			    	{% if app.session.get('role') == 2 %}
 			      		<a class="dropdown-item" href="/admin">Admin Page</a>
-			      		<a class="dropdown-item" href="/admin">Add New Student</a>
+			      		<a class="dropdown-item" href="/admin/techniques">View All Techniques</a>
 			      		<a class="dropdown-item" href="/admin/barcode">Record Attendance</a>
 			      	{% elseif app.session.get('role') == 1 %}
 			      		<a class="dropdown-item" href="/student/{{ app.session.get('barcode') }}">Profile</a>

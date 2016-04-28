@@ -6,14 +6,16 @@
 	$app->get ( '/admin', 'alen\MainController::adminPage' );
 	$app->get ( '/login', 'alen\MainController::loginPage' );
 	$app->get ( '/admin/barcode', 'alen\MainController::barcodePage');
+	$app->get ( '/admin/techniques', 'alen\MainController::techPage');
 	$app->get ( '/admin/edit/{barcode}', 'alen\MainController::editPage');
 	$app->get ( '/student/{barcode}', 'alen\MainController::studentPage' );
 	$app->get ( '/logout', 'alen\MainController::logoutPage' );
 	$app->get ( '/events/{barcode}', 'alen\MainController::eventXml');
 	
 	//POST
-	$app->post ( '/login', 	'alen\MainController::loginUser' );
-	$app->post ( '/admin/barcode', 'alen\MainController::registerAttendance' );
+	$app->post ( '/login', 	'alen\MainController::postLoginUser' );
+	$app->post ( '/admin/barcode', 'alen\MainController::postRegisterAttendance' );
+	$app->post ( '/admin/edit', 'alen\MainController::postEditDetails');
 
 	$app->error(function($e, $code) use($app){
 		$mainController = new MainController();

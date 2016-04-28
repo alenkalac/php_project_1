@@ -46,11 +46,11 @@ class Student {
 		$this->name = $s['name'];
 		$this->surname = $s['surname'];
 		$this->barcode = $s['barcode'];
-		//$this->rank = $s['rank'];
 		$this->belt = $s['belt'];
 		$this->dob = $s['dob'];
+		
 		$this->attendance = $database->getAttendance($this->barcode);
-		$this->technique = $database->getTechniqueForBelt($this->rank);
+		$this->technique = $database->getTechniqueForBelt($this->belt);
 	}
 	
 	public function setId($id) {
@@ -123,6 +123,11 @@ class Student {
 	
 	public function getDob() {
 		return $this->dob;
+	}
+	
+	public function update() {
+		$database = new Database();
+		$database->updateStudent($this);
 	}
 	
 	/**

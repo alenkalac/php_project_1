@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block styles %}
+	.tech-add {
+		
+		position: relative;
+		top: -6px;
+		right: -12px;
+	}	
+
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		{% for belt in belts %}
+			<div class="col-md-3">
+				<div class="card card-inverse">
+					<div class="card-header card-primary">
+						{{ belt.belt_color }}
+						<a 	href="#" 
+							class="pull-right tech-add btn btn-danger" 
+							data-toggle="tooltip" 
+							data-placement="top" 
+							title="Add New Tech"
+						>
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</a>
+					</div>
+					<div class="card-block card-custom">
+						<ul class="list-group">
+							{% for tech in techs[belt.belt_id] %}
+								<a href='/admin/techniques/{{ tech.id }}' class="list-group-item">{{ tech.name }}</a>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
+	
+{% endblock %}
