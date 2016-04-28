@@ -185,12 +185,20 @@ class Database {
 	public function updateStudent(Student $student) {
 		
 		$query = $this->databaseConnection->prepare("UPDATE `student` SET `barcode` = :BARCODE, `name` = :NAME, `surname` = :SNAME, `dob` = :DOB, `belt` = :BELT WHERE `id` = :ID");
-		$query->bindParam(":ID", $student->getId());
-		$query->bindParam(":BARCODE", $student->getBarcode());
-		$query->bindParam(":NAME", $student->getName());
-		$query->bindParam(":SNAME", $student->getSurname());
-		$query->bindParam(":DOB", $student->getDob());
-		$query->bindParam(":BELT", $student->getBelt());
+		
+		$id =  $student->getId();
+		$barcode = $student->getBarcode();
+		$name = $student->getName();
+		$sname = $student->getSurname();
+		$dob = $student->getDob();
+		$belt = $student->getBelt();
+		
+		$query->bindParam(":ID", $id);
+		$query->bindParam(":BARCODE", $barcode);
+		$query->bindParam(":NAME", $name);
+		$query->bindParam(":SNAME", $sname);
+		$query->bindParam(":DOB", $dob);
+		$query->bindParam(":BELT", $belt);
 		
 		return $query->execute();
 	}
