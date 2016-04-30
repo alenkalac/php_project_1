@@ -1,0 +1,156 @@
+{% extends "base.html.twig" %} 
+
+{# Title of the page #} 
+{% block title %} {{ title }} {% endblock %} 
+
+{% block styles %}
+
+	@import "/plugins/datepicker/css/bootstrap-datepicker.min.css";
+
+	.row {
+		margin-bottom: 0;
+	}
+	
+	.form-group {
+		margin-bottom: 8px;
+	}
+	
+	fieldset {
+	    border: 1px groove #ddd !important;
+	    padding: 0 1.4em 1.4em 1.4em !important;
+	    margin: 0 0 1.5em 0 !important;
+	    -webkit-box-shadow:  0px 0px 0px 0px #000;
+	            box-shadow:  0px 0px 0px 0px #000;
+	}
+	
+	legend {
+	    padding: 10px 10px 10px 10px;
+	    border-bottom: none;
+	}
+
+	legend {
+	    width: auto !important;
+	    border: none;
+	    font-size: 14px;
+	}
+{% endblock %}
+
+{# Body content #}
+{% block content %}
+	<script src="/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<div class="row pricing">
+		<div class="col-md-8 col-md-offset-2">
+			{% if error is defined %}
+				<div class="alert alert-danger text-xs-center"><strong>Error!</strong> {{ error }}</div>
+			{% endif %}
+			<div class="card card-inverse">
+				<div class="card-header card-primary">Sign up form</div>
+				<div class="card-block">
+					<form action="/signup" method="post">
+						<div class="row">
+							<div class="form-group col-sm-12">
+								<label for="username">Username</label>
+								<input id="username" name="username" type="text" value="{{ data.username|default('') }}" placeholder="Username" class="form-control form-control-lg" required>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="password-group form-group col-sm-6">
+								<label for="password">Password</label>
+								<input id="password" name="password" type="password" value="{{ data.password|default('') }}" placeholder="Password" class="form-control form-control-lg" required>
+							</div>
+							
+							<div class="password-group form-group col-sm-6">
+								<label for="repassword">Re-Password</label>
+								<input id="repassword" name="repassword" type="password" value="{{ data.repassword|default('') }}" placeholder="Password" class="form-control form-control-lg" required>
+							</div>
+						</div>
+						
+						<fieldset>
+							<legend>Student Details</legend>
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label for="firstname">First Name</label>
+									<input id="firstname" name="firstname" type="text" value="{{ data.firstname|default('') }}" placeholder="First Name" class="form-control form-control-lg" required>
+								</div>
+								
+								<div class="form-group col-sm-3">
+									<label for="lastname">Last Name</label>
+									<input id="lastname" name="lastname" type="text" value="{{ data.lastname|default('') }}" placeholder="Last Name" class="form-control form-control-lg" required>
+								</div>
+								
+								<div class="form-group col-sm-3">
+									<label for="dob">Date Of Birth</label>
+									<input id="dob" name="dob" type="text" value="{{ data.dob|default('') }}" class="form-control form-control-lg" placeholder="mm/dd/yyyy" required>
+								</div>
+								
+								<div class="form-group col-sm-3">
+									<label for="gender">Gender</label><br>
+									{% if data.gender is defined %}
+										{% if data.gender == 'f' %}
+											<input name="gender" type="radio" value="m"> Male <br>
+											<input name="gender" type="radio" value="f" checked> Female
+										{% else %}
+											<input name="gender" type="radio" value="m" checked> Male <br>
+											<input name="gender" type="radio" value="f"> Female
+									
+										{% endif %}
+									{% endif %}
+									
+								</div>
+							</div>
+						</fieldset>
+						<div class="row text-xs-center">
+							<div class="form-group col-sm-4 col-sm-offset-4">
+								<input type="submit" value="Sign Up" name="signup" class="btn btn-primary btn-block">	
+							</div>
+							<div class="form-group col-sm-4 col-sm-offset-4">
+								<button id="autofill" class="btn btn-info btn-block">Autofill Default (debug)</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+
+			$('#dob').datepicker({
+				format: "mm/dd/yyyy",
+			    startView: 2,
+			    orientation: "top auto",
+			    defaultViewDate: { year: 1977, month: 04, day: 25 }
+			});
+
+			$('#autofill').click(function(e){
+				e.preventDefault();
+				$('#username').val("TestUser_" + Math.floor(Math.random() * 10000));
+				$('#password,#repassword').val("helloworld");
+				$('#firstname').val("Alen");
+				$('#lastname').val('Kalac');
+				$('#dob').val("12/12/1987");
+			});
+			
+			$('#password,#repassword').keyup(function(){
+				$p1 = $("#password");
+				$p2 = $("#repassword");
+				if($p1.val().length < 5){
+					console.log("less than 5");
+				}
+				if($p1.val() == $p2.val()) {
+					$(".password-group").removeClass("has-danger").addClass("has-success");
+					$p1.addClass('form-control-success');
+					$p2.addClass('form-control-success');
+				}else {
+					
+					$(".password-group").removeClass("has-success").addClass("has-danger");
+					$p1.addClass('form-control-danger');
+					$p2.addClass('form-control-danger');
+				}
+				
+			});
+		});
+	</script>
+{% endblock %}

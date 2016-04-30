@@ -20,6 +20,12 @@ class Database {
 	private $database = 'php_project_1';
 	
 	/**
+	 * IP address of the mysql server
+	 * @var string
+	 */
+	private $host = 'localhost:3307';
+	
+	/**
 	 * The username to log in with to the mysql server
 	 * @var string
 	 */
@@ -42,7 +48,13 @@ class Database {
 	 */
 	public function __construct() {
 		try {
-			$this->databaseConnection = new PDO("mysql:host=127.0.0.1;dbname=$this->database", $this->username, $this->password);
+			if(getenv("TRAVIS")) {
+				$this->host = '127.0.0.1';
+				$this->username = 'root';
+				$this->password = '';
+			}
+			
+			$this->databaseConnection = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
 			$this->databaseConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return true;
 		} catch(\PDOException $e) {
@@ -72,6 +84,39 @@ class Database {
 		}else {
 			return null;
 		}
+	}
+	
+	public function checkUserExists($username) {
+		$query = $this->databaseConnection->prepare("SELECT * FROM user WHERE username = :USER");
+		$query->bindParam(":USER", $username);
+		$query->execute();
+		
+		return $query->rowCount();
+	}
+	
+	
+	/**
+	 * Inserts a new user  to the database and returns the ID of the user. 
+	 * this can be used to create a new student if needed
+	 * 
+	 * @param string $username
+	 * @param string $password
+	 * @param int $role
+	 * 
+	 * @return int
+	 */
+	public function insertNewUser($username, $password, $role) {
+		
+		$password_hashed = password_hash($password, PASSWORD_DEFAULT);
+		
+		$query = $this->databaseConnection->prepare("INSERT INTO user VALUES (NULL, :USERNAME, :PASSWORD, :ROLE)");
+		$query->bindParam(":USERNAME", $username);
+		$query->bindParam(":PASSWORD", $password_hashed);
+		$query->bindParam(":ROLE", $role);
+		
+		$query->execute();
+		
+		return $this->databaseConnection->lastInsertId();
 	}
 
 	/**
@@ -200,6 +245,32 @@ class Database {
 		$query->bindParam(":DOB", $dob);
 		$query->bindParam(":BELT", $belt);
 		
+		return $query->execute();
+	}
+	
+	/**
+	 * Insert student with details
+	 * @param Student $student
+	 * @return boolean
+	 */
+	public function insertStudent(Student $student) {
+	
+		$query = $this->databaseConnection->prepare("INSERT INTO student VALUES(:ID, :BARCODE, :NAME, :SNAME, :DOB, :BELT)");
+	
+		$id =  $student->getId();
+		$barcode = $student->getBarcode();
+		$name = $student->getName();
+		$sname = $student->getSurname();
+		$dob = $student->getDob();
+		$belt = $student->getBelt();
+	
+		$query->bindParam(":ID", $id);
+		$query->bindParam(":BARCODE", $barcode);
+		$query->bindParam(":NAME", $name);
+		$query->bindParam(":SNAME", $sname);
+		$query->bindParam(":DOB", $dob);
+		$query->bindParam(":BELT", $belt);
+	
 		return $query->execute();
 	}
 

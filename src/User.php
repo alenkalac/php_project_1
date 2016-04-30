@@ -64,6 +64,13 @@ class User {
 		return $this->role;
 	}
 	
+	public static function createUser($username, $password, $role) {
+		$database = new Database();
+		$id = $database->insertNewUser($username, $password, $role);
+		
+		return new User($username, $id, $role);
+	}
+	
 	/**
 	 * unserializes data that has been serialized by php so it can be stored in a session
 	 * @param string $data

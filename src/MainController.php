@@ -313,6 +313,82 @@ class MainController {
 		
 		return $app['twig']->render('tech.html.twig', $args);
 	}
+	
+	/**
+	 * The sign up page for students to register. 
+	 * @param int $choice
+	 * 				Choice of the package they chose from the index page
+	 * @param Request $request
+	 * 				Silex Request
+	 * @param Application $app
+	 * 				Silex Application
+	 * @return RedirectResponse
+	 * 				Redirects to a page
+	 */
+	public function signupPage($choice, Request $request, Application $app) {
+		
+		$args = [
+				'title' => 'Signup Page',
+				'page' => '',
+				'error' => $app['session']->get("Login_Error"),
+				'data' => $app['session']->get("Login_Form_Details"),
+		];
+
+		$app['session']->remove('Login_Error');
+		$app['session']->remove('Login_Form_Details');
+		
+		return $app['twig']->render('signup.html.twig', $args);
+	}
+	
+	/**
+	 * Signup Post Controller, handles the signup data
+	 * @param Request $request
+	 * @param Application $app
+	 */
+	public function postSignup(Request $request, Application $app) {
+		
+		$username = $request->get('username');
+		$password = $request->get('password');
+		$repassword = $request->get('repassword');
+		$firstname = $request->get('firstname');
+		$lastname = $request->get('lastname');
+		$dob = $request->get('dob');
+		$gender = $request->get('gender');
+		
+		$database = new Database();
+		
+		//check if user already exists.
+		if($database->checkUserExists($username)) {
+			$app['session']->set('Login_Error', 'Username Already Exists with this name');
+			$app['session']->set('Login_Form_Details', $request->request->all());
+			return new RedirectResponse("/signup/1");
+			die();
+		}
+		//check if passwords match
+		if(!($password === $repassword)) {
+			$app['session']->set('Login_Error', 'Passwords Missmatch');
+			$app['session']->set('Login_Form_Details', $request->request->all());
+			return new RedirectResponse("/signup/1");
+			die();
+		}
+		
+		$user = User::createUser($username, $password, ROLES::$STUDENT);
+		
+		$barcode = rand(100000, 999999);
+		
+		$studentData = [
+				'id' => $user->getId(),
+				'name' => $firstname,
+				'surname' => $lastname,
+				'dob' => $dob,
+				'belt' => 1,
+				'barcode' => $barcode
+		];
+		$student = new Student($studentData);
+		$student->create();
+		
+		return new RedirectResponse("/success");
+	}
 }
 
 ?>

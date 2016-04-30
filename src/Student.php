@@ -259,6 +259,14 @@ class Student {
 	}
 	
 	/**
+	 * Insert into database with the current object's values
+	 */
+	public function create() {
+		$database = new Database();
+		$database->insertStudent($this);
+	}
+	
+	/**
 	 * Gets the student by thier ID from the database
 	 * @codeCoverageIgnore
 	 * @param int $id

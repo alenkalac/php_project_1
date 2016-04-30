@@ -12,10 +12,13 @@
 	$app->get ( '/logout', 'alen\MainController::logoutPage' );
 	$app->get ( '/events/{barcode}', 'alen\MainController::eventXml');
 	
+	$app->get ( '/signup/{choice}', 'alen\MainController::signupPage');
+	
 	//POST
 	$app->post ( '/login', 	'alen\MainController::postLoginUser' );
 	$app->post ( '/admin/barcode', 'alen\MainController::postRegisterAttendance' );
 	$app->post ( '/admin/edit', 'alen\MainController::postEditDetails');
+	$app->post ( '/signup', 'alen\MainController::postSignup' );
 
 	$app->error(function($e, $code) use($app){
 		$mainController = new MainController();
