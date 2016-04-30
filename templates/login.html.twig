@@ -4,6 +4,12 @@
 {{ title }}
 {% endblock %}
 
+{% block styles %}
+	.no-margin-bottom {
+		margin-bottom: 0;
+	}
+{% endblock %}
+
 {% block content %}
 	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3">
@@ -34,8 +40,13 @@
 								<input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" aria-describedby="pass_addon">
 							</div>
 							</div>
-						
-						<input type="submit" class="btn btn-primary" value="login">
+						<div class="row no-margin-bottom">
+							<div class="col-sm-12">
+								<input type="submit" class="btn btn-primary pull-right col-sm-3" value="login"> <br><br>
+								<a href="/signup/1" class="pull-right">No Account? Register</a>
+							</div>
+							
+						</div>
 					</form>
 				</div>
 			</div>

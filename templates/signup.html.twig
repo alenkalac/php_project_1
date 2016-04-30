@@ -19,8 +19,9 @@
 	    border: 1px groove #ddd !important;
 	    padding: 0 1.4em 1.4em 1.4em !important;
 	    margin: 0 0 1.5em 0 !important;
-	    -webkit-box-shadow:  0px 0px 0px 0px #000;
-	            box-shadow:  0px 0px 0px 0px #000;
+	    
+		border-radius: 10px;
+		box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.20);
 	}
 	
 	legend {
@@ -40,7 +41,7 @@
 	<script src="/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 	<div class="row pricing">
 		<div class="col-md-8 col-md-offset-2">
-			{% if error is defined %}
+			{% if error != '' %}
 				<div class="alert alert-danger text-xs-center"><strong>Error!</strong> {{ error }}</div>
 			{% endif %}
 			<div class="card card-inverse">
@@ -93,8 +94,10 @@
 										{% else %}
 											<input name="gender" type="radio" value="m" checked> Male <br>
 											<input name="gender" type="radio" value="f"> Female
-									
 										{% endif %}
+									{% else %}
+										<input name="gender" type="radio" value="m" checked> Male <br>
+										<input name="gender" type="radio" value="f"> Female
 									{% endif %}
 									
 								</div>
