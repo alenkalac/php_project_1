@@ -86,6 +86,13 @@ class Database {
 		}
 	}
 	
+	/**
+	 * Checks if a user already exists in the database
+	 * @param string $username
+	 * 				Username to check against the database
+	 * @return boolean
+	 * 				true if user found and false if user is not found
+	 */
 	public function checkUserExists($username) {
 		$query = $this->databaseConnection->prepare("SELECT * FROM user WHERE username = :USER");
 		$query->bindParam(":USER", $username);

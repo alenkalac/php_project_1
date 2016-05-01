@@ -64,6 +64,16 @@ class User {
 		return $this->role;
 	}
 	
+	/**
+	 * Creates a user and stores it in a database
+	 * @param string $username
+	 * 				Username of the user, used with login page
+	 * @param string $password
+	 * 				Unhashed password
+	 * @param int $role
+	 * 				Role, 1 is admin, 2 is student
+	 * @codeCoverageIgnore
+	 */
 	public static function createUser($username, $password, $role) {
 		$database = new Database();
 		$id = $database->insertNewUser($username, $password, $role);

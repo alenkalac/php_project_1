@@ -260,6 +260,7 @@ class Student {
 	
 	/**
 	 * Insert into database with the current object's values
+	 * @codeCoverageIgnore
 	 */
 	public function create() {
 		$database = new Database();
