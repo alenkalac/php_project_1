@@ -166,6 +166,20 @@ class Database {
 		
 		return $result;
 	}
+	
+	public function deleteStudent($barcode) {
+		$query = $this->databaseConnection->prepare("DELETE FROM student WHERE barcode = :BARCODE");
+		$query->bindParam(":BARCODE", $barcode);
+		
+		return $query->execute();
+	}
+	
+	public function deleteUser($id) {
+		$query = $this->databaseConnection->prepare("DELETE FROM user WHERE id = :ID");
+		$query->bindParam(":ID", $id);
+	
+		return $query->execute();
+	}
 
 	/**
 	 * Get all the attendance for the student with the barcode
@@ -278,7 +292,9 @@ class Database {
 		$query->bindParam(":DOB", $dob);
 		$query->bindParam(":BELT", $belt);
 	
-		return $query->execute();
+		$query->execute();
+		
+		return $this->databaseConnection->lastInsertId();
 	}
 
 }

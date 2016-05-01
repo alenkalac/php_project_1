@@ -36,6 +36,17 @@ class MainController {
 	}
 	
 	/**
+	 * Returns true if session is set to admin
+	 * 
+	 * @return boolean
+	 * 			true if user is an admin
+	 */
+	private function isAdmin(Application $app) {
+		return $app ['session']->get ( 'role' ) == Roles::$ADMIN;
+	}
+	
+	
+	/**
 	 * Index Page Controller
 	 * 
 	 * @param Request $request        	
@@ -211,7 +222,7 @@ class MainController {
 	 * @param Application $app        	
 	 */
 	public function postRegisterAttendance(Request $request, Application $app) {
-		if ($app ['session']->get ( 'role' ) != Roles::$ADMIN)
+		if (!$this->isAdmin($app))
 			return - 1;
 		
 		$barcode = $request->get ( "barcode" );
@@ -276,7 +287,7 @@ class MainController {
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function postEditDetails(Request $request, Application $app) {
-		if ($app ['session']->get ( 'role' ) != Roles::$ADMIN)
+		if (!$this->isAdmin($app))
 			return new RedirectResponse ( "/login" );
 		
 		$data = [ 
@@ -408,6 +419,21 @@ class MainController {
 		];
 		
 		return $app ['twig']->render ( "success.html.twig", $args );
+	}
+	
+	public function deleteStudent($barcode, Request $request, Application $app) {
+		if(!$this->isAdmin($app))
+			return new RedirectResponse('/login');
+		
+		$student = new Student([]);
+		$student->getStudentFromDB($barcode);
+		
+		$student->delete();
+		
+		$user = new User("", $student->getId(), Roles::$STUDENT);
+		$user->delete();
+		
+		return new RedirectResponse("/admin");
 	}
 }
 

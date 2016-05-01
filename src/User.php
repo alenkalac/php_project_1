@@ -72,13 +72,17 @@ class User {
 	 * 				Unhashed password
 	 * @param int $role
 	 * 				Role, 1 is admin, 2 is student
-	 * @codeCoverageIgnore
 	 */
 	public static function createUser($username, $password, $role) {
 		$database = new Database();
 		$id = $database->insertNewUser($username, $password, $role);
 		
 		return new User($username, $id, $role);
+	}
+	
+	public function delete() {
+		$database = new Database();
+		$database->deleteUser($this->getId());
 	}
 	
 	/**

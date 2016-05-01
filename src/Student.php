@@ -260,11 +260,10 @@ class Student {
 	
 	/**
 	 * Insert into database with the current object's values
-	 * @codeCoverageIgnore
 	 */
 	public function create() {
 		$database = new Database();
-		$database->insertStudent($this);
+		$this->id = $database->insertStudent($this);
 	}
 	
 	/**
@@ -278,5 +277,10 @@ class Student {
 		$s = $database->getStudentById($id);
 		
 		return new Student($s);
+	}
+	
+	public function delete() {
+		$database = new Database();
+		$database->deleteStudent($this->getBarcode());
 	}
 }

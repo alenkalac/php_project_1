@@ -111,33 +111,52 @@ class StudentTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testGetStudentFromDB() {
-		$student = new Student([]);
-		$student->getStudentFromDB('999888');
+		$data = [
+				'barcode' => '1',
+				'name' => 'test',
+				'surname' => '',
+				'belt' => '1',
+				'dob' => '12/12/1987',
+				
+		];
 		
-		$name = 'Alen';
+		$student = new Student($data);
+		$student->create();
 		
-		$this->assertEquals( $name, $student->getName());
+		$nStudent = new Student([]);
+		$nStudent->getStudentFromDB('1');
+		
+		$nStudent->delete();
+		
+		$this->assertEquals('test', $nStudent->getName());
 	}
 	
 	public function testStudentUpdate() {
+		$data = [
+				'barcode' => '1',
+				'name' => 'test',
+				'surname' => '',
+				'belt' => '1',
+				'dob' => '12/12/1987',
+				
+		];
 		
-		$result = 'TestName';
+		$student = new Student($data);
+		$student->create();
 		
-		$student = new Student([]);
-		$student->getStudentFromDB('999888');
+		$expectedResult = 'UpdatedName';
 		
-		$this->oldName = $student->getName();
-		
-		$student->setName($result);
+		$student->setName($expectedResult);
 		$student->update();
 		
-		$student->getStudentFromDB('999888');
-		$actual = $student->getName();
+		$nStudent = new Student([]);
+		$nStudent->getStudentFromDB($student->getBarcode());
+		$value = $nStudent->getName();
 		
-		$student->setName($this->oldName);
-		$student->update();
+		$nStudent->delete();
 		
-		$this->assertEquals($result, $actual);
+		
+		$this->assertEquals($expectedResult, $value);
 	}
 	
 }

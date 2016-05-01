@@ -13,6 +13,7 @@
 	$app->get ( '/events/{barcode}', 'alen\MainController::eventXml');
 	$app->get ( '/signup/{choice}', 'alen\MainController::signupPage');
 	$app->get ( '/success', 'alen\MainController::successPage');
+	$app->get ( 'admin/delete/{barcode}', 'alen\MainController::deleteStudent');
 	
 	//POST
 	$app->post ( '/login', 	'alen\MainController::postLoginUser' );
