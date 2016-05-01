@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %} 
+
+{# Title of the page #} 
+{% block title %} {{ title }} {% endblock %} 
+
+{% block styles %}
+{% endblock %}
+
+{# Body content #}
+{% block content %}
+	<div class="row pricing">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="card card-inverse">
+				<div class="card-header card-primary">Success</div>
+				<div class="card-block">
+					<div class="alert alert-success text-xs-center">
+						<strong>Sign up Complete.</strong><br>
+						You can log in now.<br>
+						<a href="/login">Login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -69,7 +69,7 @@ class Student {
 	 * Detault Constructor for the Student Class
 	 * @param array $details
 	 */
-	public function __construct($details) {
+	public function __construct($details = []) {
 		if(isset($details['id']))
 			$this->setId($details['id']);
 		if(isset($details['name']))

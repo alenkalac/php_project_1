@@ -156,7 +156,7 @@ class Database {
 		$query->bindParam(":BARCODE", $barcode);
 		$query->execute();
 		$result = $query->fetch(PDO::FETCH_ASSOC);
-
+		
 		return $result;
 	}
 

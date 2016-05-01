@@ -7,6 +7,7 @@ namespace alen;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -388,6 +389,15 @@ class MainController {
 		$student->create();
 		
 		return new RedirectResponse("/success");
+	}
+	
+	public function successPage(Request $request, Application $app) {
+		$args = [
+				'title' => 'Success!',
+				'page' => '',
+		];
+		
+		return $app['twig']->render("success.html.twig", $args);
 	}
 }
 
