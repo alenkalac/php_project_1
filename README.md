@@ -5,8 +5,8 @@
 Download Phar Zip
 [Download 7Zip'd File](https://www.dropbox.com/s/0sttf65ay5a8xxo/phars.7z?dl=0)
 
-Includes: 
-	1) phpDocumentor.phar
-	2) phpUnit.phar
-	3) codecept.phar
+Phar Zip Includes:   
+	1) phpDocumentor.phar  
+	2) phpUnit.phar  
+	3) codecept.phar  
 
