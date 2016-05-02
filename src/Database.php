@@ -284,8 +284,8 @@ class Database
     /**
      * Gets all belts from the database
      * 
-     * @param $id An
-     *        	if of the belt. (1 to 10)
+     * @param int $id 
+     *          An if of the belt. (1 to 10)
      * @return String Colour of the belt
      */
     public function getBeltById($id)
