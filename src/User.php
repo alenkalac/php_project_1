@@ -80,6 +80,9 @@ class User {
 		return new User($username, $id, $role);
 	}
 	
+	/**
+	 * Deletes the current user stored in the object
+	 */
 	public function delete() {
 		$database = new Database();
 		$database->deleteUser($this->getId());

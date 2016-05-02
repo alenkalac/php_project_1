@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3307
--- Generation Time: Apr 28, 2016 at 02:46 AM
+-- Generation Time: May 02, 2016 at 04:46 AM
 -- Server version: 10.1.9-MariaDB-log
 -- PHP Version: 5.6.16
 
@@ -46,7 +46,10 @@ INSERT INTO `attendance` (`id`, `student_barcode`, `date`) VALUES
 (19, 999888, 1460974418),
 (20, 999887, 1461008948),
 (21, 999888, 1461769346),
-(22, 999888, 1461789790);
+(22, 999888, 1461789790),
+(23, 999888, 1462040578),
+(24, 999888, 1462115765),
+(25, 999888, 1462189139);
 
 -- --------------------------------------------------------
 
@@ -95,8 +98,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `barcode`, `name`, `surname`, `dob`, `belt`) VALUES
-(1, 999888, 'Alen', 'Kalac', '12-12-1987', 1),
-(2, 999887, 'test33', 'Test6', '10-12-1981', 2);
+(1, 999888, 'Alen', 'Kalac', '12/12/1987', 1),
+(2, 999887, 'test33', 'Test6', '10/12/1981', 2);
 
 -- --------------------------------------------------------
 
@@ -120,8 +123,60 @@ INSERT INTO `techniques` (`id`, `name`, `belt`) VALUES
 (8, 'Inner Forearm Middle Block', 1),
 (9, 'Outer Forearm Rising Block', 1),
 (11, 'Middle Front Snap Kick', 1),
-(12, 'Test 1', 2),
-(13, 'test 2', 4);
+(14, 'double Forefist Middle Punch', 2),
+(15, 'Combination of kicking and punching', 2),
+(16, 'Combination of blocking and punching', 2),
+(17, 'Knifehand Low Outward Block', 2),
+(18, 'Inner Forearm Middle Block', 2),
+(19, 'Knifehand Middle Block', 2),
+(20, 'Double Forefist Middle Punch', 3),
+(21, 'Forefist High Punch', 3),
+(22, 'Combination of blocking and punching', 3),
+(23, 'Twin Forearm Block', 3),
+(24, 'Knifehand Middle Guarding Block', 3),
+(25, 'Knifehand Middle Guarding Block', 3),
+(26, 'Middle Side Piercing Kick', 3),
+(27, 'Knifehand Middle Side Strike', 4),
+(28, 'Straight Fingertip Thrust', 4),
+(29, 'Outer Forearm High Wedging Block', 4),
+(30, 'Backfist High Side Strike', 4),
+(31, 'Front Rising Kick', 4),
+(32, 'Backfist High Side Strike', 5),
+(33, 'Outer Forearm High Wedging Block', 5),
+(34, 'Inner Forearm Circular Block', 5),
+(35, 'Front Rising Kick', 5),
+(36, 'Forefist Middle Punch', 5),
+(37, 'Outer Forearm Middle Guarding Block', 5),
+(38, 'Knifehand High Inward Strike', 5),
+(39, 'Double Forefist Middle Punch', 6),
+(40, 'Double Forearm High Block', 6),
+(41, 'Palm Middle Hooking Block', 6),
+(42, 'Front Elbow Strike', 6),
+(43, 'X-Fist Rising Block', 7),
+(44, 'Upper Elbow Strike', 7),
+(45, 'Twin Fist Vertical High Punch', 7),
+(46, 'Twin Fist Upset Punch', 7),
+(47, 'Palm Upward Block', 7),
+(48, 'Palm Pressing Block', 7),
+(49, 'U-Shape Block', 7),
+(50, 'Angle Punch', 7),
+(51, 'L-stance, reverse knifehand side block', 7),
+(52, 'Knifehand Middle Guarding Block', 7),
+(53, 'Outer Forearm W-Shape Block', 8),
+(54, 'X-Fist Rising Block', 8),
+(55, 'Twin Fist Vertical High Punch', 8),
+(56, 'Double Forearm High Block', 8),
+(57, 'Upset Fingertip Thrust', 8),
+(58, 'Flat Fingertip High Thrust', 8),
+(59, 'Double Forearm Low Pushing Block', 8),
+(60, 'Knifehand Low Guarding Block', 8),
+(61, 'Palm Middle Pushing Block', 9),
+(62, 'Straight Fingertip Thrust', 9),
+(63, 'Forefist Middle Punch', 9),
+(64, 'Upward Punch', 9),
+(65, 'Knifehand Middle Outward Strike', 9),
+(66, 'Double Forearm Low Pushing Block', 9),
+(67, 'Forefist Middle Punch', 9);
 
 -- --------------------------------------------------------
 
@@ -189,7 +244,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `belts`
 --
@@ -199,17 +254,17 @@ ALTER TABLE `belts`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `techniques`
 --
 ALTER TABLE `techniques`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --

@@ -5,3 +5,6 @@
 /composer.lock
 /phpDocumentor.phar
 /phpunit.phar
+
+tests/_output/*
+/codecept.phar

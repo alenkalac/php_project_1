@@ -107,7 +107,14 @@ class StudentTest extends PHPUnit_Framework_TestCase {
 		$result = "11";
 	
 		$this->assertEquals($result, $student->getRank());
+	}
 	
+	public function testStudentBeltColour() {
+		$student = new Student(['belt' => 1]);
+		
+		$expected = "White Belt";
+	
+		$this->assertEquals($expected, $student->getBeltColour());
 	}
 	
 	public function testGetStudentFromDB() {

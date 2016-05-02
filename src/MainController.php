@@ -6,20 +6,20 @@
 namespace alen;
 
 use Silex\Application;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Main Controller Class
  * @codeCoverageIgnore
- * 
+ *
  * @author Alen Kalac
  */
 class MainController {
 	
 	/**
 	 * Error page controller
-	 * 
+	 *
 	 * @param
 	 *        	code
 	 *        	An error code
@@ -37,18 +37,18 @@ class MainController {
 	
 	/**
 	 * Returns true if session is set to admin
-	 * 
-	 * @return boolean
-	 * 			true if user is an admin
+	 *
+	 * @param Application $app
+	 *        	The silex application
+	 * @return boolean true if user is an admin
 	 */
 	private function isAdmin(Application $app) {
 		return $app ['session']->get ( 'role' ) == Roles::$ADMIN;
 	}
 	
-	
 	/**
 	 * Index Page Controller
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -63,7 +63,7 @@ class MainController {
 	
 	/**
 	 * Admin Page Controller
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -89,7 +89,7 @@ class MainController {
 	
 	/**
 	 * Student Page Controller
-	 * 
+	 *
 	 * @param String|int $barcode        	
 	 * @param Request $request        	
 	 * @param Application $app        	
@@ -126,7 +126,7 @@ class MainController {
 	
 	/**
 	 * Barcode Page Controller.
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -148,7 +148,7 @@ class MainController {
 	
 	/**
 	 * Logout Page Controller, Handles the logging out and deletes the sessions
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -159,7 +159,7 @@ class MainController {
 	
 	/**
 	 * Login User Post Request Controller
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -202,7 +202,7 @@ class MainController {
 	
 	/**
 	 * Login Page Controller to display the Login Page
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -217,12 +217,12 @@ class MainController {
 	
 	/**
 	 * Marks a student as addended class using a barcode
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
 	public function postRegisterAttendance(Request $request, Application $app) {
-		if (!$this->isAdmin($app))
+		if (! $this->isAdmin ( $app ))
 			return - 1;
 		
 		$barcode = $request->get ( "barcode" );
@@ -256,7 +256,7 @@ class MainController {
 	
 	/**
 	 * Edit page controller that renders the edit page template
-	 * 
+	 *
 	 * @param int|string $barcode        	
 	 * @param Request $request        	
 	 * @param Application $app        	
@@ -281,13 +281,13 @@ class MainController {
 	/**
 	 * Post edit Detail controller.
 	 * When student's are edited, form posts to this function
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function postEditDetails(Request $request, Application $app) {
-		if (!$this->isAdmin($app))
+		if (! $this->isAdmin ( $app ))
 			return new RedirectResponse ( "/login" );
 		
 		$data = [ 
@@ -307,7 +307,7 @@ class MainController {
 	
 	/**
 	 * Tech page controller that renders the tech page template
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -325,15 +325,14 @@ class MainController {
 				'page' => '',
 				'belts' => $belts,
 				'techs' => $techs 
-		]
-		;
+		];
 		
 		return $app ['twig']->render ( 'tech.html.twig', $args );
 	}
 	
 	/**
 	 * The sign up page for students to register.
-	 * 
+	 *
 	 * @param int $choice
 	 *        	Choice of the package they chose from the index page
 	 * @param Request $request
@@ -358,7 +357,7 @@ class MainController {
 	
 	/**
 	 * Signup Post Controller, handles the signup data
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -408,7 +407,7 @@ class MainController {
 	
 	/**
 	 * Renders the success page after a successful registration.
-	 * 
+	 *
 	 * @param Request $request        	
 	 * @param Application $app        	
 	 */
@@ -421,19 +420,39 @@ class MainController {
 		return $app ['twig']->render ( "success.html.twig", $args );
 	}
 	
+	/**
+	 * Delete a student controller
+	 *
+	 * @param string $barcode
+	 *        	Student Barcode that the student is identified with
+	 * @param Request $request
+	 *        	Silex Request
+	 * @param Application $app
+	 *        	Silex Application
+	 * @return RedirectResponse
+	 * 			Silex RedirectResponse
+	 */
 	public function deleteStudent($barcode, Request $request, Application $app) {
-		if(!$this->isAdmin($app))
-			return new RedirectResponse('/login');
+		if (! $this->isAdmin ( $app ))
+			return new RedirectResponse ( '/login' );
 		
-		$student = new Student([]);
-		$student->getStudentFromDB($barcode);
+		$student = new Student ( [ ] );
+		$student->getStudentFromDB ( $barcode );
 		
-		$student->delete();
+		$student->delete ();
 		
-		$user = new User("", $student->getId(), Roles::$STUDENT);
-		$user->delete();
+		$user = new User ( "", $student->getId (), Roles::$STUDENT );
+		$user->delete ();
 		
-		return new RedirectResponse("/admin");
+		return new RedirectResponse ( "/admin" );
+	}
+	
+	public function contactPage(Request $request, Application $app) {
+		$args = [
+				'title' => 'Contact us!',
+				'page' => 'contact'
+		];
+		return $app ['twig']->render ( "contact.html.twig", $args );
 	}
 }
 

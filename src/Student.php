@@ -216,6 +216,11 @@ class Student {
 		return $this->belt;
 	}
 	
+	public function getBeltColour() {
+		$db = new Database();
+		return $db->getBeltById($this->getBelt());
+	}
+	
 	/**
 	 * Sets the student's Rank
 	 * @deprecated
@@ -279,6 +284,9 @@ class Student {
 		return new Student($s);
 	}
 	
+	/**
+	 * Deletes the current student stored in this object
+	 */
 	public function delete() {
 		$database = new Database();
 		$database->deleteStudent($this->getBarcode());

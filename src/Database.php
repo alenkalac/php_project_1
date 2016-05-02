@@ -55,7 +55,7 @@ class Database {
 			}
 			
 			$this->databaseConnection = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
-			$this->databaseConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			//$this->databaseConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return true;
 		} catch(\PDOException $e) {
 			return false;
@@ -167,6 +167,11 @@ class Database {
 		return $result;
 	}
 	
+	/**
+	 * Delete a student with the barcode
+	 * @param string $barcode
+	 * @return boolean
+	 */
 	public function deleteStudent($barcode) {
 		$query = $this->databaseConnection->prepare("DELETE FROM student WHERE barcode = :BARCODE");
 		$query->bindParam(":BARCODE", $barcode);
@@ -174,6 +179,11 @@ class Database {
 		return $query->execute();
 	}
 	
+	/**
+	 * Delete a user with the id 
+	 * @param int $id
+	 * @return boolean
+	 */
 	public function deleteUser($id) {
 		$query = $this->databaseConnection->prepare("DELETE FROM user WHERE id = :ID");
 		$query->bindParam(":ID", $id);
@@ -241,6 +251,19 @@ class Database {
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
 		
 		return $result;
+	}
+	
+	/**
+	 * Gets all belts from the database
+	 * @return String Colour of the belt
+	 */
+	public function getBeltById($id) {
+		$query = $this->databaseConnection->prepare("SELECT * FROM belts WHERE belt_id = :ID");
+		$query->bindParam(":ID", $id);
+		$query->execute();
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+	
+		return $result['belt_color'];
 	}
 	
 	/**
