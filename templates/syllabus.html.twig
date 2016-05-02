@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %} 
+{% block title %} {{ title }} {% endblock %} 
+
+{% block content %}
+	<div class="row">
+		{% for belt in belts %}
+			<div class="col-md-9 col-md-offset-3">
+				<div class="card card-inverse ">
+					<div class="card-header card-primary">
+						{{ belt.belt_color }}
+					</div>
+					<div class="card-block card-custom">
+						<ul class="list-group">
+							{% for tech in techs[belt.belt_id] %}
+								<a href='#' class="list-group-item">{{ tech.name }}</a>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

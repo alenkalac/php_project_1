@@ -13,6 +13,9 @@
  		"phpunit": "php phpunit.phar",
 		"phpunit-coverage": "php phpunit.phar --coverage-html src/coverage",
 		"phpdoc": "php phpDocumentor.phar -d ./src -t ./src/documentation --template=responsive-twig",
-		"codecept": "php codecept.phar run acceptance"
+		"codecept": "php codecept.phar run acceptance",
+		"fixsrc":"php php-cs-fixer.phar fix --level=psr2 ./src",
+    	"fixpublic":"php php-cs-fixer.phar fix --level=psr2 ./public",
+    	"fixtests":"php php-cs-fixer.phar fix --level=psr2 ./tests"
  	}
 }

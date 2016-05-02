@@ -7,5 +7,4 @@ require_once __DIR__ . '/../app/setup.php';
 // Routes
 require_once __DIR__ . '/../app/routes.php';
 //more things
-$app->run ();
-?>
+$app->run();

@@ -15,6 +15,7 @@
 	$app->get ( '/success', 'alen\MainController::successPage');
 	$app->get ( '/admin/delete/{barcode}', 'alen\MainController::deleteStudent');
 	$app->get ( '/contact', 'alen\MainController::contactPage');
+	$app->get ( '/syllabus', 'alen\MainController::syllabusPage');
 	
 	//POST
 	$app->post ( '/login', 	'alen\MainController::postLoginUser' );
